@@ -7,8 +7,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Karlo Krakan, BSc</title>
-    <link href="favicon.png" rel=icon>
+    <title>{{ resume.name }}</title>
+    <link rel="shortcut icon" type="image/png" href="{% static 'favicon.png' %}"/>
     <link href="https://fonts.googleapis.com/css?family=Hind:300,400,500,600,700" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{% static 'home/css/font-awesome.min.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'home/css/bootstrap.css' %}">
@@ -57,7 +57,7 @@
                             id="profile-image" />
                     </div>
                     <div class="content loading" id="content-loading">
-                        <h1>Karlo Krakan, BSc</h1>
+                        <h1>{{ resume.name }}</h1>
                         <span class="lead">
                                 {{ resume.headline }}
                             <a href="mailto:karlo@krakan.ca">karlo [@] krakan.ca</a>

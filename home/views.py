@@ -4,10 +4,11 @@ from resume.models import Resume, SkillGroup
 
 # Create your views here.
 def home_page(request):
-    software_projects = SoftwareProject.objects.all()
-    mathphysics_projects = MathPhysicsProject.objects.all()
-    web_projects = WebProject.objects.all()
+    software_projects = SoftwareProject.objects.order_by('-pub_date')
+    mathphysics_projects = MathPhysicsProject.objects.order_by('-pub_date')
+    web_projects = WebProject.objects.order_by('-pub_date')
     resume = Resume.objects.all()[0]
+    
     skill_groups = SkillGroup.objects.all()
     context = {
         'software_projects': software_projects,

@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 # Create your models here.
 class Resume(models.Model):
@@ -47,9 +48,13 @@ class WorkExperience(models.Model):
     start_date = models.CharField(max_length=10)
     end_date = models.CharField(max_length=10)
     resume = models.ForeignKey(Resume, on_delete=models.CASCADE)
+    pub_date = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return '#' + str(self.pk)
+
+    class Meta:
+        ordering = ['-pub_date']
 
 class WorkExperienceItem(models.Model):
     text = models.CharField(max_length=500)
@@ -63,9 +68,14 @@ class AcademicExperience(models.Model):
     course = models.CharField(max_length=100)
     institution = models.CharField(max_length=100)
     resume = models.ForeignKey(Resume, on_delete=models.CASCADE)
+    pub_date = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return '#' + str(self.pk)
+
+    class Meta:
+        ordering = ['-pub_date']
+
 
 class AcademicExperienceItem(models.Model):
     text = models.CharField(max_length=500)
@@ -81,9 +91,14 @@ class ResumeProject(models.Model):
     start_date = models.CharField(max_length=20)
     end_date = models.CharField(max_length=20)
     resume = models.ForeignKey(Resume, on_delete=models.CASCADE)
+    pub_date = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return '#' + str(self.pk)
+
+    class Meta:
+        ordering = ['-pub_date']
+
 
 class ResumeProjectExperienceItem(models.Model):
     text = models.CharField(max_length=500)
@@ -99,9 +114,14 @@ class VolunteerWork(models.Model):
     start_date = models.CharField(max_length=10)
     end_date = models.CharField(max_length=10)
     resume = models.ForeignKey(Resume, on_delete=models.CASCADE)
+    pub_date = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return '#' + str(self.pk)
+
+    class Meta:
+        ordering = ['-pub_date']
+
 
 class VolunteerExperienceItem(models.Model):
     text = models.CharField(max_length=500)
