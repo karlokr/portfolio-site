@@ -8,10 +8,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ resume.name }}</title>
-    <link rel="shortcut icon" type="image/png" href="{% static 'favicon.png' %}"/>
+    <link rel="shortcut icon" type="image/png" href="{% static 'home/favicon.png' %}"/>
     <link href="https://fonts.googleapis.com/css?family=Hind:300,400,500,600,700" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{% static 'home/css/font-awesome.min.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'home/css/bootstrap.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/dist/css/bootstrap.min.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'home/css/style.css' %}">
 </head>
 
@@ -65,10 +65,10 @@
                         <nav class="navbar navbar-default" role="navigation">
                             <div class="container-fluid" style="padding: 0">
                                 <ul class="nav navbar-nav " style="padding: 0;">
-                                    <li><a class="projects-button" style="padding-left: 40px; padding-right:40px"
-                                            href="javascript:void(0);">Portfolio</a></li>
                                     <li><a class="resume-button" style="padding-right: 40px; padding-left:40px"
                                             href="javascript:void(0);">Resume</a></li>
+                                    <li><a class="projects-button" style="padding-left: 40px; padding-right:40px"
+                                            href="javascript:void(0);">Portfolio</a></li>
                                 </ul>
                             </div>
                         </nav>
@@ -100,7 +100,7 @@
             <!-- right-block-container -->
             <div class="right-col-block blocks">
                 <!-- #resume -->
-                <div class="right-col-block blocks" id="resume" style="display: none">
+                <div class="right-col-block blocks" id="resume">
                 
                     <div class="theiaStickySidebar">
                         <section class="expertise-wrapper section-wrapper gray-bg">
@@ -149,6 +149,7 @@
                                     <div class="col-md-12">
                                         <div class="progress-wrapper">
                                             {% for skill_group in skill_groups %}
+                                            <div class="col-md-6">
                                                 <p><b>{{ skill_group }}</b></p>
                                                 <p class="res-strengths">
                                                 {% for skill in resume.skill_set.all %}
@@ -159,6 +160,7 @@
                                                 
                                                 {% endfor %}
                                                 </p>
+                                             </div>
                                             {% endfor %}
                                         </div>
                                         <!-- /.progress-wrapper -->
@@ -364,7 +366,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="InputSubject">Subject</label>
-                                                    <input type="text" name="subject" class="form-control"
+                                                    <input type="text" name="subject" required="" class="form-control"
                                                         id="InputSubject" placeholder="Subject">
                                                 </div>
                                                 <div class="form-group">
@@ -372,6 +374,8 @@
                                                     <textarea class="form-control" rows="4" required="" name="message"
                                                         id="message-text" placeholder="Write message"></textarea>
                                                 </div>
+
+                                                <div id="contactFormResumeMessage"></div>
 
                                                 <button type="button" id="resume-mail-button"
                                                     class="btn btn-primary">Submit</button>
@@ -408,7 +412,7 @@
                 
 
                 <!-- #projects -->
-                <div class="right-col-block blocks" id="projects">
+                <div class="right-col-block blocks" id="projects" style="display: none">
                 
                     <div class="theiaStickySidebar">
                         <!-- .github-section -->
@@ -446,9 +450,8 @@
                                         <div class="project-header">
                                             <div class="col-md-9" style="margin-bottom: 15px;">
                                                 <h2>{{project.title}}</h2>
-                                                <small>{% autoescape off %}{{ project.description }}{% endautoescape %}
-                                                </small>
-                                            </div>
+                                                {% autoescape off %}{{ project.short_description }}{% endautoescape %}
+					    </div>                                                
                                         </div>
                                         {% if project.projectvideo_set.count == 0 %}
                                             {% for img in project.projectimage_set.all %}
@@ -606,6 +609,10 @@
                                         <div class="col-md-12" style="text-align: center; margin-top: 15px">
                                             <strong>Built with:</strong> {{project.technology}}
                                         </div>
+
+					<div class="col-md-12" style="text-align:center;">
+					    <a href="{% url 'projects:project_detail' project.pk %}">Read more...</a>
+					</div>
                                     </div>
                                 </div>
 
@@ -786,7 +793,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="InputSubject">Subject</label>
-                                                    <input type="text" name="subject" class="form-control"
+                                                    <input type="text" name="subject" required="" class="form-control"
                                                         id="InputSubject" placeholder="Subject">
                                                 </div>
                                                 <div class="form-group">
@@ -794,6 +801,8 @@
                                                     <textarea class="form-control" rows="4" required="" name="message"
                                                         id="message-text" placeholder="Write message"></textarea>
                                                 </div>
+
+                                                <div id="contactFormProjectsMessage"></div>
 
                                                 <button type="button" class="btn btn-primary"
                                                     id="projects-mail-button">Submit</button>
@@ -834,8 +843,8 @@
     </div>
     <!-- #main-wrapper -->
 
-    <script src="{% static 'home/js/jquery-2.1.4.min.js' %}"></script>
-    <script src="{% static 'home/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'jquery/dist/jquery.min.js' %}"></script>
+    <script src="{% static 'bootstrap/dist/js/bootstrap.min.js' %}"></script>
     <script src="{% static 'home/js/theia-sticky-sidebar.js' %}"></script>
     <script src="{% static 'home/js/isInViewport.js' %}"></script>
     <script src="{% static 'home/js/scripts.js' %}"></script>

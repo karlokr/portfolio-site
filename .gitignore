@@ -1,6 +1,32 @@
+# Environment and secrets
 .env
+
+# IDE
 .vscode
-media
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyc
+*$py.class
+
+# Django
 db.sqlite3
-migrations
-__pycache__
+db.sqlite3-journal
+*.log
+staticfiles/
+media/
+
+# Node
+node_modules/
+package-lock.json
+
+# Migrations (optional - comment out if you want to track them)
+*/migrations/*.py
+!*/migrations/__init__.py
+
+# OS
+.DS_Store
+*.swp
+*.swo
+*~

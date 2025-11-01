@@ -3,16 +3,17 @@
 {% load static %}
 
 {% block content %}
-<div class="container">
-    <h1>Projects</h1>
+    <h1 style="margin-top:20px">Projects</h1>
     <div class="row">
     {% for project in projects %}
         <div class="col-md-4">
             <div class="card mb-2">
-                <img class="card-img-top" src="{% static project.image %}">
-                <div class="card-body">
+		<div style="max-height:400px">
+                	<img class="card-img-top" style="object-fit:cover;max-height:300px;" src="{{ project.projectimage_set.all.first.image.url }}">
+                </div>
+		<div class="card-body">
                     <h5 class="card-title">{{ project.title }}</h5>
-                    <p class="card-text">{{ project.description }}</p>
+                    <p class="card-text">{% autoescape off %}{{ project.short_description }}{% endautoescape %}</p>
                     <a href="{% url 'projects:project_detail' project.pk %}"
                         class="btn btn-primary">
                         Read More
@@ -21,6 +22,5 @@
             </div>
         </div>
     {% endfor %}
-</div>
 {% endblock %}
 

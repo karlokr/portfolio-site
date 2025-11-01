@@ -3,7 +3,8 @@ from django.utils import timezone
 
 class Project(models.Model):
     title = models.CharField(max_length=200)
-    description = models.TextField()
+    short_description = models.TextField()
+    long_description = models.TextField()
     technology = models.CharField(max_length=50, default=None, blank=True, null=True)
     css_id = models.CharField(max_length=75)
     pub_date = models.DateTimeField(default=timezone.now)

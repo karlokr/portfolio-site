@@ -6,20 +6,24 @@ class Resume(models.Model):
     name = models.CharField(max_length=20)
     headline = models.CharField(max_length=30)
     location = models.CharField(max_length=30)
-    about_text = models.CharField(max_length=500)
+    about_text = models.TextField()
+    github_link = models.CharField(max_length=256, default='')
+    github_username = models.CharField(max_length=30, default='')
+    linkedin_link = models.CharField(max_length=256, default='')
+    email = models.CharField(max_length=100, default='')
 
     def __str__(self):
         return self.name
 
 class ExpertiseItem(models.Model):
-    text = models.CharField(max_length=500)
+    text = models.TextField()
     resume = models.ForeignKey(Resume, on_delete=models.CASCADE)
 
     def __str__(self):
         return '#' + str(self.pk)
 
 class SkillGroup(models.Model):
-    skill_group = models.CharField(max_length=30)
+    skill_group = models.CharField(max_length=50)
 
     def __str__(self):
         return self.skill_group
